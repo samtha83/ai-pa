@@ -1,20 +1,20 @@
-# Current Feature: Initialize Backend Stack
+# Current Feature
+
+<!-- Feature Name -->
 
 ## Status
 
-Completed
+<!-- Not Started|In Progress|Completed -->
+
+Not Started
 
 ## Goals
 
-- Create a runnable FastAPI backend served by Uvicorn with a versioned API.
-- Add configuration loading plus local CORS, middleware, and error handling.
-- Expose a health endpoint and keep the app ready for later persistence and auth features.
+<!-- Goals & requirements -->
 
 ## Notes
 
-- The backend will remain a thin transport and policy boundary for this feature.
-- Persistence, auth, and orchestration are intentionally out of scope.
-- Validate the result by launching the backend and confirming `GET /api/v1/health` returns HTTP 200.
+<!-- Any extra notes -->
 
 ## History
 
@@ -33,4 +33,4 @@ Completed
   - Added the FastAPI app package with typed settings and application wiring.
   - Created the versioned `/api/v1` route structure and health endpoint.
   - Added correlation IDs, local CORS middleware, and structured JSON error responses.
-  - Verified behavior with pytest: 2 health/documentation-related tests passed.
+  - Verified behavior with pytest: 2 backend API tests passed.
