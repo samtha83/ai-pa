@@ -23,3 +23,9 @@ Not Started
   - Added a tracked `.env.example` template for safe local configuration.
   - Updated `.gitignore` to protect secrets, SQLite files, generated output, and local caches.
   - Kept documentation in `docs/` for later feature work.
+- Completed: Initialize Frontend Stack
+  - Created the Next.js App Router frontend in `frontend/`.
+  - Enabled TypeScript, Tailwind CSS, and the local app shell.
+  - Added placeholder routes for login, dashboard, clients, calendar, and settings.
+  - Added loading, error, and not-found states plus a typed API client boundary.
+  - Verified the app compiles successfully with `npm run build`.
