@@ -1,4 +1,4 @@
-# Current Feature: Add SQLite Layer
+# Current Feature
 
 <!-- Feature Name -->
 
@@ -6,29 +6,15 @@
 
 <!-- Not Started|In Progress|Completed -->
 
-Completed
+Not Started
 
 ## Goals
 
 <!-- Goals & requirements -->
 
-- Add a configurable, migration-backed local SQLite database.
-- Create provider and demo-session foundation tables with timestamps, indexes, and revocation state.
-- Expose database readiness separately from process health.
-- Keep test databases isolated from developer data and avoid storing raw content or credentials.
-
 ## Notes
 
 <!-- Any extra notes -->
-
-- Implement with SQLAlchemy and Alembic unless an existing repository standard requires an equivalent.
-- Store the SQLite file under the ignored local data directory.
-- Execute and validate the five implementation steps from `phase1-feature4-add-sqlite-layer.md` in order.
-- Migration command: `cd backend && alembic upgrade head`.
-- Validation: isolated migration schema checks and readiness success/failure tests pass; backend suite reports 5 passed.
-- Review verdict: Ready to complete. Goals and acceptance criteria are met; no scope creep identified.
-- Test result: `backend/.venv/bin/pytest -q` passed with 5 tests. Coverage includes readiness success/failure, structured API behavior, isolated migration execution, tables, foreign keys, and indexes.
-- Test gap: No provider/session repository behavior exists yet; model CRUD tests are deferred until those repositories are implemented.
 
 ## History
 
@@ -48,3 +34,8 @@ Completed
   - Created the versioned `/api/v1` route structure and health endpoint.
   - Added correlation IDs, local CORS middleware, and structured JSON error responses.
   - Verified behavior with pytest: 2 backend API tests passed.
+- Completed: Add SQLite Layer
+  - Added configurable SQLAlchemy sessions and Alembic migrations for local SQLite.
+  - Added provider and demo-session foundation tables with timestamps, foreign keys, indexes, and revocation state.
+  - Added database readiness reporting and isolated migration tests.
+  - Verified the backend suite with 5 passing tests.
