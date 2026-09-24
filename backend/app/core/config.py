@@ -1,3 +1,4 @@
+from pathlib import Path
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -8,7 +9,7 @@ class Settings(BaseSettings):
     FRONTEND_ORIGIN: str = "http://localhost:3000"
     API_PREFIX: str = "/api/v1"
     APP_VERSION: str = "0.1.0"
-    DATABASE_URL: str = "sqlite:///./data/local.db"
+    DATABASE_URL: str = f"sqlite:///{Path(__file__).resolve().parents[3] / 'data' / 'local.db'}"
     SESSION_SECRET: str = "local-dev-secret"
 
     model_config = SettingsConfigDict(
