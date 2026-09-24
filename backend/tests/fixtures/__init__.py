@@ -1,0 +1,1 @@
+"""Test fixtures for isolated backend resources."""
