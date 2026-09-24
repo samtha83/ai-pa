@@ -1,23 +1,25 @@
-# Current Feature: Create Repo Structure
+# Current Feature
+
+<!-- Feature Name -->
 
 ## Status
 
-In Progress
+<!-- Not Started|In Progress|Completed -->
+
+Not Started
 
 ## Goals
 
-- Create the minimum repository structure needed to develop the frontend, backend, documentation, and local runtime data independently.
-- Keep application code separated from local runtime data and safe configuration files.
-- Preserve the existing project documentation and make the structure ready for later Phase 1 work.
+<!-- Goals & requirements -->
 
 ## Notes
 
-- Feature file: `context/features/phase1-feature1-repo-structure.md`
-- Phase: Phase 1: Local Runtime Foundation
-- Source plan: `docs/mvp-build-plan.md`
-- Scope intentionally excludes app implementation, database migrations, and deployment infrastructure.
-- Do not overwrite existing repo changes from other contributors.
+<!-- Any extra notes -->
 
 ## History
 
-<!-- Keep this updated. Earliest to latest -->
+- Completed: Create Repo Structure
+  - Added dedicated `frontend/`, `backend/`, and `data/` runtime directories.
+  - Added a tracked `.env.example` template for safe local configuration.
+  - Updated `.gitignore` to protect secrets, SQLite files, generated output, and local caches.
+  - Kept documentation in `docs/` for later feature work.
