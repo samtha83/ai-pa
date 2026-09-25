@@ -1,4 +1,4 @@
-# Current Feature
+# Current Feature: Add Startup Docs
 
 <!-- Feature Name -->
 
@@ -6,15 +6,19 @@
 
 <!-- Not Started|In Progress|Completed -->
 
-Not Started
+Completed
 
 ## Goals
 
-<!-- Goals & requirements -->
+- Document clean-checkout prerequisites and local environment setup.
+- Document frontend and backend installation, startup, ports, API docs, tests, migrations, and reset commands.
+- Clearly state the local-only, non-production limitations of demo authentication and SQLite data.
 
 ## Notes
 
-<!-- Any extra notes -->
+Implement the documentation in a root developer guide. Keep commands aligned with
+the current frontend package scripts, backend pyproject, Alembic configuration,
+and `.env.example`. Do not add credentials or document production deployment.
 
 ## History
 
