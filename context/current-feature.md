@@ -1,4 +1,4 @@
-# Current Feature: Add Startup Docs
+# Current Feature
 
 <!-- Feature Name -->
 
@@ -6,19 +6,15 @@
 
 <!-- Not Started|In Progress|Completed -->
 
-Completed
+Not Started
 
 ## Goals
 
-- Document clean-checkout prerequisites and local environment setup.
-- Document frontend and backend installation, startup, ports, API docs, tests, migrations, and reset commands.
-- Clearly state the local-only, non-production limitations of demo authentication and SQLite data.
+<!-- Goals & requirements -->
 
 ## Notes
 
-Implement the documentation in a root developer guide. Keep commands aligned with
-the current frontend package scripts, backend pyproject, Alembic configuration,
-and `.env.example`. Do not add credentials or document production deployment.
+<!-- Any extra notes -->
 
 ## History
 
@@ -48,3 +44,7 @@ and `.env.example`. Do not add credentials or document production deployment.
   - Added login, logout, current-user, and protected backend auth routes.
   - Connected frontend login, logout, session state, and protected-route redirects.
   - Verified the backend suite with 7 passing tests and the frontend production build.
+- Completed: Add Startup Docs
+  - Added clean-checkout setup, environment, startup, migration, testing, and reset instructions.
+  - Documented SQLite provider records and the current demo-auth limitation.
+  - Verified migrations, provider lookup, backend tests, frontend build, and documentation formatting.
