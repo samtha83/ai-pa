@@ -7,6 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     APP_ENV: str = "development"
     FRONTEND_ORIGIN: str = "http://localhost:3000"
+    CORS_ORIGINS: list[str] = ["http://localhost:3000"]
     API_PREFIX: str = "/api/v1"
     APP_VERSION: str = "0.1.0"
     DATABASE_URL: str = f"sqlite:///{Path(__file__).resolve().parents[3] / 'data' / 'local.db'}"

@@ -1,4 +1,4 @@
-# Current Feature
+# Current Feature: Add Demo Auth
 
 <!-- Feature Name -->
 
@@ -6,15 +6,33 @@
 
 <!-- Not Started|In Progress|Completed -->
 
-Not Started
+Completed
 
 ## Goals
 
 <!-- Goals & requirements -->
 
+- Seed a single local demo provider with idempotent startup initialization.
+- Implement login, logout, and current-user auth flows using server-side session validation.
+- Protect backend routes using provider identity resolved from the session.
+- Connect frontend session state to login/logout and protected-route redirects.
+- Keep the demo flow clearly marked as local-development-only and replaceable later.
+
 ## Notes
 
 <!-- Any extra notes -->
+
+- This feature depends on the SQLite foundation and provider/session tables created in the previous feature.
+- Use a server-validated HTTP-only session or equivalent cookie-based transport; never trust browser-supplied provider IDs.
+- Keep session data minimal: store only opaque identifiers or hashes, not plaintext credentials or raw session content.
+- The implementation should proceed in the order in the feature file: seed provider, auth service, auth API routes, protected-route dependency, frontend session behavior.
+- Validate each step before continuing to the next.
+
+## Verification
+
+- Review verdict: Ready to complete.
+- Backend auth tests: 7 passed.
+- Frontend production build: passed.
 
 ## History
 
