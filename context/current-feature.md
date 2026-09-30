@@ -1,23 +1,32 @@
-# Current Feature
+# Current Feature: Provider Profile Model
 
-<!-- Feature Name -->
 
 ## Status
 
-<!-- Not Started|In Progress|Completed -->
-
-Not Started
+Completed
 
 ## Goals
 
-<!-- Goals & requirements -->
+
+
+- Persist the active provider's profile details in the existing SQLite-backed provider record.
+- Validate required identity fields and timezone values at the backend boundary.
+- Keep profile reads and writes scoped to the authenticated provider ID.
 
 ## Notes
 
-<!-- Any extra notes -->
+The Phase 1 `Provider` model and `providers` table already exist with `id`, `name`, `business_name`, `timezone`, and timestamps. Extend this foundation only if profile-specific metadata is required; preserve the demo-auth identity contract. Existing local worktree changes are outside this feature and must remain untouched.
 
 ## History
 
+- In Progress: Provider Profile Model
+  - Started on branch `feature-provider-profile-model`.
+  - Confirmed the Phase 1 provider model and initial migration already exist; implementation will build on them rather than duplicate the table.
+- Completed: Provider Profile Model
+  - Added provider profile metadata through an additive Alembic migration and extended the existing SQLAlchemy model.
+  - Added timezone-aware Pydantic validation, provider-ID-scoped repository/service access, and persistence tests.
+  - Migrated the local SQLite database to `0002_provider_profile` and verified all 9 backend tests pass.
+  - Left API routes and frontend screens to their dedicated Phase 2 features.
 - Completed: Create Repo Structure
   - Added dedicated `frontend/`, `backend/`, and `data/` runtime directories.
   - Added a tracked `.env.example` template for safe local configuration.

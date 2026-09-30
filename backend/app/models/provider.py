@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, Index, String, func
+from sqlalchemy import JSON, DateTime, ForeignKey, Index, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
@@ -13,11 +13,16 @@ class Provider(Base):
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     business_name: Mapped[str | None] = mapped_column(String(255))
     timezone: Mapped[str] = mapped_column(String(64), nullable=False, default="UTC")
+    tone: Mapped[str | None] = mapped_column(String(80))
+    modality: Mapped[str | None] = mapped_column(String(100))
+    service_type: Mapped[str | None] = mapped_column(String(100))
+    template_settings: Mapped[dict[str, object] | None] = mapped_column(JSON)
+    boundaries: Mapped[dict[str, object] | None] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now()
+        DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now()
     )
 
     sessions: Mapped[list["DemoSession"]] = relationship(back_populates="provider")

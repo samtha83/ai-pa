@@ -13,3 +13,10 @@ def test_migrations_create_isolated_provider_schema(migration_database: str):
         "ix_demo_sessions_provider_id",
         "ix_demo_sessions_expires_at",
     }
+    assert {
+        "tone",
+        "modality",
+        "service_type",
+        "template_settings",
+        "boundaries",
+    }.issubset({column["name"] for column in inspector.get_columns("providers")})
