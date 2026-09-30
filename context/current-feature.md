@@ -1,21 +1,17 @@
-# Current Feature: Provider Profile Model
+# Current Feature
 
 
 ## Status
 
-Completed
+Not Started
 
 ## Goals
 
-
-
-- Persist the active provider's profile details in the existing SQLite-backed provider record.
-- Validate required identity fields and timezone values at the backend boundary.
-- Keep profile reads and writes scoped to the authenticated provider ID.
+<!-- Goals & requirements -->
 
 ## Notes
 
-The Phase 1 `Provider` model and `providers` table already exist with `id`, `name`, `business_name`, `timezone`, and timestamps. Extend this foundation only if profile-specific metadata is required; preserve the demo-auth identity contract. Existing local worktree changes are outside this feature and must remain untouched.
+<!-- Any extra notes -->
 
 ## History
 
