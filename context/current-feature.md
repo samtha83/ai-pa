@@ -1,20 +1,31 @@
-# Current Feature
+# Current Feature: Provider Preferences Model
 
 
 ## Status
 
-Not Started
+Completed
 
 ## Goals
 
-<!-- Goals & requirements -->
+- Persist provider-specific working hours, session duration, buffer time, blackout dates, daily capacity, and summary-template defaults.
+- Validate preference values and schedule structure before persistence.
+- Provide provider-scoped read/update operations and authenticated API access with defaults for first use.
 
 ## Notes
 
-<!-- Any extra notes -->
+Implement only preferences and their API surface. Reuse the existing provider profile, database session, schemas/repository/service patterns, and session authentication; resolve provider scope from the authenticated session, never request-supplied IDs. Preserve unrelated worktree changes.
 
 ## History
 
+- In Progress: Provider Preferences Model
+  - Started on branch `feature-provider-preferences-model`.
+  - Added a provider-owned one-to-one preference record with validation and authenticated read/update endpoints.
+- Completed: Provider Preferences Model
+  - Added a one-to-one provider preferences model and Alembic migration `0003_provider_preferences`.
+  - Added validated schedule, session, blackout-date, daily-capacity, and summary-template settings with first-read defaults.
+  - Added provider-scoped repository/service operations and authenticated `GET`/`PUT /api/v1/providers/me/preferences` routes.
+  - Required offset-free local working-hour times and documented provider-time display behavior for future chat and appointment messages.
+  - Verified the focused preferences and migration tests (7 passed), full backend suite (15 passed), and `git diff --check`.
 - In Progress: Provider Profile Model
   - Started on branch `feature-provider-profile-model`.
   - Confirmed the Phase 1 provider model and initial migration already exist; implementation will build on them rather than duplicate the table.

@@ -26,6 +26,33 @@ class Provider(Base):
     )
 
     sessions: Mapped[list["DemoSession"]] = relationship(back_populates="provider")
+    preferences: Mapped["ProviderPreferences | None"] = relationship(
+        back_populates="provider", cascade="all, delete-orphan", uselist=False
+    )
+
+
+class ProviderPreferences(Base):
+    __tablename__ = "provider_preferences"
+
+    provider_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("providers.id", ondelete="CASCADE"), primary_key=True
+    )
+    working_hours: Mapped[dict[str, dict[str, str]]] = mapped_column(JSON, nullable=False)
+    session_duration: Mapped[int] = mapped_column(nullable=False, default=50)
+    buffer_time: Mapped[int] = mapped_column(nullable=False, default=10)
+    blackout_dates: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    max_sessions_per_day: Mapped[int] = mapped_column(nullable=False, default=8)
+    summary_template: Mapped[str] = mapped_column(
+        String(80), nullable=False, default="standard"
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now()
+    )
+
+    provider: Mapped[Provider] = relationship(back_populates="preferences")
 
 
 class DemoSession(Base):

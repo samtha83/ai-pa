@@ -1,3 +1,3 @@
-from app.models.provider import DemoSession, Provider
+from app.models.provider import DemoSession, Provider, ProviderPreferences
 
-__all__ = ["DemoSession", "Provider"]
+__all__ = ["DemoSession", "Provider", "ProviderPreferences"]
