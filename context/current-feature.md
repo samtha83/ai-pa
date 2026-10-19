@@ -1,22 +1,17 @@
-# Current Feature: UI Screens
+# Current Feature
 
 
 ## Status
 
-Completed
+Not Started
 
 ## Goals
 
-- Add provider onboarding/settings UI for viewing and updating `name`, `business_name`, and `timezone`.
-- Add provider-scoped client list, creation, and detail/edit screens.
-- Preserve saved values after reload and make loading, empty, and error states explicit.
+<!-- Goals & requirements -->
 
 ## Notes
 
-- Scope: minimal local MVP screens only; no styling overhaul, analytics, scheduling, or Phase 3 workflows.
-- Use the existing Next.js App Router shell and typed API client; align forms to backend provider/client schemas.
-- Implementation order: provider settings; client create/list; client detail; run the frontend production build and verify UI behavior.
-- Source: `context/features/phase2-feature4-ui-screens.md`.
+<!-- Any extra notes -->
 
 ## History
 
@@ -71,3 +66,6 @@ Completed
   - Added provider settings and provider-scoped client create, list, detail, and edit screens with explicit loading, error, and empty states.
   - Added authenticated provider profile read/update endpoints and fixed app-shell session hydration and profile-name refresh behavior.
   - Verified the frontend production build, all 29 backend tests, and local browser flows for settings and client persistence after refresh.
+- Completed: UI Screens
+  - Merged provider settings and provider-scoped client list, create, detail, and edit screens into `main`.
+  - Added authenticated provider profile endpoints and verified the production build, 29 backend tests, and browser persistence flows.
