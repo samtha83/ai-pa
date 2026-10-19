@@ -1,3 +1,5 @@
+import { apiRequest } from "@/lib/api";
+
 export type ClientSession = {
   providerId: string;
   providerName: string;
@@ -5,7 +7,7 @@ export type ClientSession = {
 };
 
 const SESSION_KEY = "ai_pa_session";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const SESSION_CHANGE_EVENT = "ai-pa-session-change";
 
 export function getStoredSession(): ClientSession | null {
   if (typeof window === "undefined") return null;
@@ -27,30 +29,16 @@ export function getStoredSession(): ClientSession | null {
 export function setStoredSession(session: ClientSession) {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  window.dispatchEvent(new Event(SESSION_CHANGE_EVENT));
 }
 
 export function clearStoredSession() {
   if (typeof window === "undefined") return;
   window.localStorage.removeItem(SESSION_KEY);
+  window.dispatchEvent(new Event(SESSION_CHANGE_EVENT));
 }
 
-async function apiRequest<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...(init.headers ?? {}),
-    },
-  });
-
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(payload?.error?.message ?? "Request failed.");
-  }
-
-  return payload as T;
-}
+export { SESSION_CHANGE_EVENT };
 
 export async function loginToDemoProvider(): Promise<ClientSession> {
   const payload = await apiRequest<{ provider_id: string; provider: { name: string; business_name?: string } }>(
