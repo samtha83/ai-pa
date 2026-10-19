@@ -1,22 +1,17 @@
-# Current Feature: API Routes
+# Current Feature
 
 
 ## Status
 
-Completed
+Not Started
 
 ## Goals
 
-- Provide authenticated versioned API routes for provider profile, provider preferences, and client records.
-- Derive every provider data scope from the validated session, never from request-controlled provider IDs.
-- Validate payloads and return explicit errors for invalid, unauthenticated, missing, and cross-provider requests.
+<!-- Goals & requirements -->
 
 ## Notes
 
-- Scope: API boundary only; do not expand into admin, scheduling, chat, or summary APIs.
-- Existing repository-scoped services, Pydantic schemas, and demo-auth dependency are prerequisites; reuse them.
-- Verify profile/preferences/client reads and writes, invalid payloads, unauthenticated requests, and cross-provider denial.
-- Source: `context/features/phase2-feature5-api-routes.md`.
+<!-- Any extra notes -->
 
 ## History
 
@@ -78,3 +73,7 @@ Completed
   - Verified authenticated, provider-scoped profile, preferences, and client endpoints were already registered and wired to their scoped services.
   - Added regression tests for unauthenticated profile/client requests, rejection or ignoring of request-supplied provider IDs, and denial of cross-provider client updates.
   - Verified all 31 backend tests pass.
+- Completed: API Routes
+  - Confirmed the existing provider profile, preferences, and client routes are authenticated and provider-scoped.
+  - Added tests for session-only provider scope, auth requirements, validation errors, and cross-provider client update denial.
+  - Verified 31 backend tests pass; merged the regression coverage into `main`.
