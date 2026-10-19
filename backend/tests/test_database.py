@@ -9,6 +9,7 @@ def test_migrations_create_isolated_provider_schema(migration_database: str):
         "providers",
         "demo_sessions",
         "provider_preferences",
+        "clients",
         "alembic_version",
     }.issubset(
         inspector.get_table_names()
@@ -41,3 +42,23 @@ def test_migrations_create_isolated_provider_schema(migration_database: str):
         "provider_id"
     ]
     assert inspector.get_foreign_keys("provider_preferences")[0]["referred_table"] == "providers"
+    client_columns = {
+        column["name"] for column in inspector.get_columns("clients")
+    }
+    assert {
+        "id",
+        "provider_id",
+        "name",
+        "email",
+        "phone",
+        "timezone",
+        "service_type",
+        "goals",
+        "status",
+        "created_at",
+        "updated_at",
+    }.issubset(client_columns)
+    assert inspector.get_foreign_keys("clients")[0]["referred_table"] == "providers"
+    assert {index["name"] for index in inspector.get_indexes("clients")} == {
+        "ix_clients_provider_id"
+    }

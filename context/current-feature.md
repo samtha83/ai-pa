@@ -1,20 +1,29 @@
-# Current Feature
+# Current Feature: Client Model
 
 
 ## Status
 
-Not Started
+Completed
 
 ## Goals
 
-<!-- Goals & requirements -->
+- Add provider-owned client records with identity, contact details, timezone, service type, goals, and status.
+- Validate client creation and update payloads against the MVP data contract.
+- Provide provider-scoped repository and API access, preventing cross-provider reads and writes.
 
 ## Notes
 
-<!-- Any extra notes -->
+- Persist clients in SQLite with a stable unique ID and a foreign key to the owning provider.
+- Keep the schema focused on immediate MVP needs; avoid advanced CRM, regulatory, scheduling, or shared-provider features.
+- Implementation order: SQLAlchemy model and Alembic migration; request/response schemas; repository, service, and API routes.
+- Acceptance checks: persistence, provider-scoped create/list/update, invalid payload rejection, and cross-provider access denial.
 
 ## History
 
+- Completed: Client Model
+  - Started from `context/features/phase2-feature3-client-model.md`.
+  - Added provider-owned client persistence, an Alembic migration, payload schemas, provider-scoped repository/service methods, and authenticated list/create/detail/update routes.
+  - Verified migration and persistence behavior, invalid payload rejection (including explicit null status on update), and cross-provider denial; full backend suite passes with 27 tests.
 - In Progress: Provider Profile Model
   - Started on branch `feature-provider-profile-model`.
   - Confirmed the Phase 1 provider model and initial migration already exist; implementation will build on them rather than duplicate the table.
