@@ -26,6 +26,9 @@ class Provider(Base):
     )
 
     sessions: Mapped[list["DemoSession"]] = relationship(back_populates="provider")
+    clients: Mapped[list["Client"]] = relationship(
+        back_populates="provider", cascade="all, delete-orphan"
+    )
     preferences: Mapped["ProviderPreferences | None"] = relationship(
         back_populates="provider", cascade="all, delete-orphan", uselist=False
     )
