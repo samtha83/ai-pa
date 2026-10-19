@@ -10,6 +10,7 @@ from app.api.v1.auth import router as auth_router
 from app.api.v1.clients import router as clients_router
 from app.api.v1.health import router as health_router
 from app.api.v1.preferences import router as preferences_router
+from app.api.v1.providers import router as providers_router
 from app.core.config import get_settings
 from app.db.seed import ensure_demo_provider
 
@@ -81,6 +82,7 @@ def create_app() -> FastAPI:
     app.include_router(auth_router, prefix=settings.API_PREFIX)
     app.include_router(clients_router, prefix=settings.API_PREFIX)
     app.include_router(preferences_router, prefix=settings.API_PREFIX)
+    app.include_router(providers_router, prefix=settings.API_PREFIX)
     return app
 
 

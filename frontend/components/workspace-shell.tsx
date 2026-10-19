@@ -2,8 +2,15 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { clearStoredSession, getStoredSession, logoutFromDemoProvider } from "@/lib/auth";
+import {
+  clearStoredSession,
+  getStoredSession,
+  logoutFromDemoProvider,
+  SESSION_CHANGE_EVENT,
+  type ClientSession,
+} from "@/lib/auth";
 
 const routes = [
   { href: "/login", label: "Login" },
@@ -24,7 +31,19 @@ export function WorkspaceShell({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const session = getStoredSession();
+  const [session, setSession] = useState<ClientSession | null>(null);
+
+  useEffect(() => {
+    function updateSession() {
+      setSession(getStoredSession());
+    }
+
+    updateSession();
+    window.addEventListener(SESSION_CHANGE_EVENT, updateSession);
+    return () => {
+      window.removeEventListener(SESSION_CHANGE_EVENT, updateSession);
+    };
+  }, []);
 
   async function handleLogout() {
     try {
