@@ -49,7 +49,9 @@ def provider_profile_client() -> Generator[TestClient, None, None]:
 def test_provider_profile_api_reads_and_updates_current_provider(
     provider_profile_client: TestClient,
 ):
-    response = provider_profile_client.get("/api/v1/providers/me")
+    response = provider_profile_client.get(
+        "/api/v1/providers/me?provider_id=profile-provider-b"
+    )
     assert response.status_code == 200
     assert response.json()["name"] == "Provider A"
 
@@ -85,3 +87,15 @@ def test_provider_profile_api_rejects_invalid_updates(
         "/api/v1/providers/me", json={"name": None}
     )
     assert response.status_code == 422
+
+    response = provider_profile_client.patch(
+        "/api/v1/providers/me",
+        json={"name": "Attempted Override", "provider_id": "profile-provider-b"},
+    )
+    assert response.status_code == 422
+
+
+def test_provider_profile_api_requires_authentication():
+    response = TestClient(app).get("/api/v1/providers/me")
+    assert response.status_code == 401
+    assert response.json()["error"]["code"] == "unauthorized"

@@ -101,7 +101,7 @@ def test_preferences_api_rejects_invalid_schedule_and_values(
         "/api/v1/providers/me/preferences",
         json={
             "provider_id": "some-other-provider",
-            "working_hours": {},
+            "working_hours": {"monday": {"start": "09:00", "end": "17:00"}},
             "session_duration": 50,
             "buffer_time": 10,
             "blackout_dates": [],
@@ -110,6 +110,12 @@ def test_preferences_api_rejects_invalid_schedule_and_values(
         },
     )
     assert request_with_provider_override.status_code == 422
+
+    response = preferences_client.get(
+        "/api/v1/providers/me/preferences?provider_id=some-other-provider"
+    )
+    assert response.status_code == 200
+    assert response.json()["provider_id"] == "preferences-provider"
 
 
 def test_preferences_api_rejects_offset_aware_working_hours(

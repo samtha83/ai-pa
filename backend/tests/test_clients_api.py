@@ -117,3 +117,26 @@ def test_client_api_hides_other_providers_clients(clients_client: TestClient):
     response = clients_client.get("/api/v1/clients/client-b-private")
     assert response.status_code == 404
     assert clients_client.get("/api/v1/clients").json() == []
+    assert (
+        clients_client.get("/api/v1/clients?provider_id=client-provider-b").json()
+        == []
+    )
+
+    update_response = clients_client.patch(
+        "/api/v1/clients/client-b-private",
+        json={"name": "Unauthorized Update"},
+    )
+    assert update_response.status_code == 404
+
+    app.dependency_overrides[get_current_provider] = lambda: {
+        "provider_id": "client-provider-b"
+    }
+    private_client = clients_client.get("/api/v1/clients/client-b-private")
+    assert private_client.status_code == 200
+    assert private_client.json()["name"] == "Private Client"
+
+
+def test_client_api_requires_authentication():
+    response = TestClient(app).get("/api/v1/clients")
+    assert response.status_code == 401
+    assert response.json()["error"]["code"] == "unauthorized"
