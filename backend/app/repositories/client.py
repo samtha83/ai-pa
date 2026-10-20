@@ -52,9 +52,12 @@ class ClientRepository:
         if client is None:
             return None
 
+        unsupported_fields = values.keys() - self._CLIENT_FIELDS
+        if unsupported_fields:
+            field = next(iter(unsupported_fields))
+            raise ValueError(f"Unsupported client field: {field}")
+
         for field, value in values.items():
-            if field not in self._CLIENT_FIELDS:
-                raise ValueError(f"Unsupported client field: {field}")
             setattr(client, field, value)
 
         if values:

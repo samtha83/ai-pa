@@ -77,3 +77,11 @@ Not Started
   - Confirmed the existing provider profile, preferences, and client routes are authenticated and provider-scoped.
   - Added tests for session-only provider scope, auth requirements, validation errors, and cross-provider client update denial.
   - Verified 31 backend tests pass; merged the regression coverage into `main`.
+- In Progress: Repository Layer
+  - Started from `context/features/phase2-feature6-repository-layer.md` on branch `feature-repository-layer`.
+  - Confirmed provider, preferences, and client repositories are already wired through their services; adding direct tests for persistence and provider scoping.
+- Completed: Repository Layer
+  - Added direct repository tests for provider, preference, and client persistence, defaults, and provider scoping.
+  - Validated every update field before mutation to prevent partial session changes when an unsupported field is supplied.
+  - Added an internal provider repository create operation without adding a profile creation API or UI.
+  - Verified 7 repository tests and all 38 backend tests pass.
