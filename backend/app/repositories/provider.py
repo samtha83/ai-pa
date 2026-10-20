@@ -23,6 +23,18 @@ class ProviderRepository:
     def get_profile(self, provider_id: str) -> Provider | None:
         return self.session.get(Provider, provider_id)
 
+    def create(self, provider_id: str, values: Mapping[str, object]) -> Provider:
+        unsupported_fields = values.keys() - self._PROFILE_FIELDS
+        if unsupported_fields:
+            field = next(iter(unsupported_fields))
+            raise ValueError(f"Unsupported provider profile field: {field}")
+
+        provider = Provider(id=provider_id, **values)
+        self.session.add(provider)
+        self.session.commit()
+        self.session.refresh(provider)
+        return provider
+
     def update_profile(
         self, provider_id: str, values: Mapping[str, object]
     ) -> Provider | None:
@@ -30,9 +42,12 @@ class ProviderRepository:
         if provider is None:
             return None
 
+        unsupported_fields = values.keys() - self._PROFILE_FIELDS
+        if unsupported_fields:
+            field = next(iter(unsupported_fields))
+            raise ValueError(f"Unsupported provider profile field: {field}")
+
         for field, value in values.items():
-            if field not in self._PROFILE_FIELDS:
-                raise ValueError(f"Unsupported provider profile field: {field}")
             setattr(provider, field, value)
 
         if values:

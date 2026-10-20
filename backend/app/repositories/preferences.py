@@ -13,6 +13,15 @@ DEFAULT_WORKING_HOURS = {
 
 
 class ProviderPreferencesRepository:
+    _PREFERENCE_FIELDS = {
+        "working_hours",
+        "session_duration",
+        "buffer_time",
+        "blackout_dates",
+        "max_sessions_per_day",
+        "summary_template",
+    }
+
     def __init__(self, session: Session) -> None:
         self.session = session
 
@@ -48,16 +57,12 @@ class ProviderPreferencesRepository:
         if preferences is None:
             return None
 
+        unsupported_fields = values.keys() - self._PREFERENCE_FIELDS
+        if unsupported_fields:
+            field = next(iter(unsupported_fields))
+            raise ValueError(f"Unsupported provider preference field: {field}")
+
         for field, value in values.items():
-            if field not in {
-                "working_hours",
-                "session_duration",
-                "buffer_time",
-                "blackout_dates",
-                "max_sessions_per_day",
-                "summary_template",
-            }:
-                raise ValueError(f"Unsupported provider preference field: {field}")
             setattr(preferences, field, value)
 
         self.session.commit()
